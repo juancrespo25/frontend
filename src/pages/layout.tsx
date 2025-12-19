@@ -9,12 +9,17 @@ const MainLayout = () => {
       <AppSidebar />
       <main className="w-full min-h-screen">
         <div className="flex items-center justify-between p-4">
-          <SidebarTrigger />
+          <img
+            src="https://placecats.com/300/80?fit=contain&position=top"
+            alt="Logo"
+          />
           <header className="flex flex-col items-center gap-2">
             <User />
             <div>Juan Crespo</div>
           </header>
         </div>
+
+        <SidebarTrigger />
         <Outlet />
       </main>
     </SidebarProvider>
