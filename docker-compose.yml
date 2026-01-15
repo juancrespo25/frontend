@@ -1,0 +1,20 @@
+
+services:
+  frontend:
+    image: juancrespo25/frontend
+    container_name: frontend
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=${VITE_API_URL}
+      - VITE_URL_REPORT=${VITE_URL_REPORT}
+      - VITE_URL_WEB=${VITE_URL_WEB}
+    env_file:
+      - .env
+    restart: unless-stopped
+    networks:
+      - jessval-network
+
+networks:
+  jessval-network:
+    driver: bridge

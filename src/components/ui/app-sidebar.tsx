@@ -1,5 +1,4 @@
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
-
+import { FcHome, FcSearch, FcExport } from "react-icons/fc";
 import {
   Sidebar,
   SidebarContent,
@@ -10,42 +9,41 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { getEnvVar } from "@/utils/env";
 
 // Menu items.
 const items = [
   {
     title: "Home",
-    url: "#",
-    icon: Home,
+    url: "/",
+    icon: FcHome,
   },
   {
-    title: "Inbox",
-    url: "#",
-    icon: Inbox,
+    title: "Seguimiento de envios",
+    url: "seguimiento-envios",
+    icon: FcSearch,
   },
   {
-    title: "Calendar",
-    url: "#",
-    icon: Calendar,
-  },
-  {
-    title: "Search",
-    url: "#",
-    icon: Search,
-  },
-  {
-    title: "Settings",
-    url: "#",
-    icon: Settings,
+    title: "Busqueda por filtros",
+    url: "busqueda-por-filtros",
+    icon: FcSearch,
   },
 ];
 
 export function AppSidebar() {
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("provincias_cache");
+    window.location.href = getEnvVar('VITE_URL_WEB');
+  };
+
   return (
     <Sidebar>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
+          <SidebarGroupLabel className="mt-4 mb-4 py-8 text-lg font-bold">
+            Seguimiento Web
+          </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
@@ -53,11 +51,23 @@ export function AppSidebar() {
                   <SidebarMenuButton asChild>
                     <a href={item.url}>
                       <item.icon />
-                      <span>{item.title}</span>
+                      <span className="text-base">{item.title}</span>
                     </a>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+        <SidebarGroup className="mt-auto">
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton onClick={handleLogout}>
+                  <FcExport />
+                  <span className="text-base">Cerrar Sesión</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

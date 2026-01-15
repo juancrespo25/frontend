@@ -1,8 +1,9 @@
 import axios from 'axios';
+import { getEnvVar } from '@/utils/env';
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL as string,
-  timeout: 5000,
+  baseURL: getEnvVar('VITE_API_URL'),
+  timeout: 6000,
     headers: {
     'Content-Type': 'application/json',
   },
